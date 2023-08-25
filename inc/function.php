@@ -1,4 +1,7 @@
-<?php  
-require_once("./inc/db_connection.php");
-dbConnexion ( );
-?>
+<?php
+function debug($param){
+    echo '<pre>';
+	var_dump($param);
+echo '</pre>';
+
+}
