@@ -8,8 +8,8 @@ require_once('../inc/function.php');
 // var_dump($_POST);
  if(isset($_POST['enregistrer'])){
     //  récupérer des données saissies par l'utilisateur
-debug($_POST['enregistrer']);
-die;
+// debug($_POST['enregistrer']);
+// die;
     
     $nom = htmlspecialchars ($_POST['firstname']);
     $prenom = htmlspecialchars ($_POST['lastname']);
@@ -24,8 +24,8 @@ die;
         echo 'veillez cocher la case condition';
     }
     
-    $passeword = htmlspecialchars($_POST["passeword"]);
     $birthday = htmlspecialchars($_POST["birthday"]);
+    $passeword = htmlspecialchars($_POST["passeword"]);
     $passewordCrack = password_hash($passeword, PASSWORD_DEFAULT); 
     $role ="ROLE_USER";
 
@@ -46,3 +46,39 @@ die;
     
  }
 ?>
+
+<!-- POUR SES CONNECTER AU SITE AVEC BOUTON CONNEXION -->
+
+<?php
+if(isset($_POST['connexion'])){ 
+    $email = $_POST['email'];
+    $birthday = $_POST['birthday'];
+    // etablir la connexion avec la bd
+    $connect = dbConnexion();
+    // preparer la requete
+    $connexionRequest = $connect->prepare("SELECT * FROM userphp WHERE email = ?");
+    // executer la requete
+    $connexionRequest->execute(array($email));
+    // recupere le resultat de la requete
+    $userphp = $connexionRequest->fetch(PDO::FETCH_ASSOC); // convertir le resultat de la requete en tableau pour le manipuler facilement 
+    // echo "<pre>";
+    // print_r($userphp);
+    // echo "<pre>";
+
+    if(empty($userphp)){ // si le tableau $userphp est vide
+        echo "userphp inconnu...";
+    }else{ // sinon
+        // on verifie le birthday
+        if(password_verify($birthday, $userphp['birthday'])){
+            //creer les variable de session
+            $_SESSION["id"] = $userphp['id_userphp'];
+            $_SESSION["email"] = $userphp['email'];
+            $_SESSION["img"] = $userphp['profil_img'];
+
+            header("Location: accueil.php");
+
+        }else{
+            echo "birthday";
+        }
+    }
+}

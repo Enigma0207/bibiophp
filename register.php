@@ -4,6 +4,7 @@ require_once ('./inc/header.php');
 ;
 ?>
     <div class="container">
+    <button type="submit" class="btn btn-primary" name ='connexion'>connectez-vous</button>
             <h2>Formulaire de Contact</h2>
 
             <form action="./modele/db_registre.php" method="post" enctype="multipart/form-data">

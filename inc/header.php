@@ -19,4 +19,4 @@ require_once ('./inc/function.php');
     
 </body>
 
-<p>bONJOURS MR alin</p>
+<!-- <p>bONJOURS MR alin</p> -->
