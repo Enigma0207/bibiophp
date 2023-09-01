@@ -12,7 +12,7 @@ if(isset($_POST["connexion"])){
 
     if(empty ($utilisateur)){
          $_SESSION["error"] = "utilisateur inconnu";
-         header("Location:connexion.php");
+         header("Location: ../connexion.php");
     }
      
     else {
@@ -20,7 +20,8 @@ if(isset($_POST["connexion"])){
         $_SESSION["id"] = $utilisateur["id"];
         $_SESSION["email"] = $utilisateur["email"];
         setcookie('id_user', $utilisateur['id'], time() +3600, '/', 'localhost', false , true);
-        echo "bienvenue".$email ;
+        header("Location: ../profil.php");
+
 
          }else {
 
