@@ -17,6 +17,6 @@ require_once ('./inc/function.php');
 </head>
 
     
-</body>
+<body>
 
 <!-- <p>bONJOURS MR alin</p> -->
